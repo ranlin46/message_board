@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板</title>
+</head>
+<body>
+    <h1>留言板</h1>
+    <form action="/add" method="post">
+        <label for="author">作者:</label>
+        <input type="text" id="author" name="author" required>
+        <br>
+        <label for="content">留言内容:</label>
+        <textarea id="content" name="content" required></textarea>
+        <br>
+        <button type="submit">添加留言</button>
+    </form>
+    <ul>
+        {% for message in messages %}
+            <li>
+                <strong>{{ message.author }}</strong>: {{ message.content }}
+                <a href="{{ url_for('delete_message', message_id=message.id) }}">删除</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
